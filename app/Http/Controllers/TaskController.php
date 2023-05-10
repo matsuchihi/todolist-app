@@ -16,9 +16,15 @@ class TaskController extends Controller
         // すべてのフォルダを取得する
         $folders = Auth::user()->folders()->get();
 
+
         // 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
-
+        if (is_null($current_folder)) {
+            abort(404);
+        }
+        if (Auth::user()->id !== $current_folder->user_id) {
+            abort(403);
+        }
         // 選ばれたフォルダに紐づくタスクを取得する
         $tasks = $current_folder->tasks()->get();
 
@@ -31,6 +37,10 @@ class TaskController extends Controller
 
     public function showCreateForm(int $id)
     {
+        $current_folder = Folder::find($id);
+        if (is_null($current_folder)) {
+            abort(404);
+        }
         return view('tasks/create', [
             'folder_id' => $id
         ]);
@@ -38,6 +48,7 @@ class TaskController extends Controller
 
     public function create(int $id, CreateTask $request)
     {
+
         $current_folder = Folder::find($id);
 
         $task = new Task();
