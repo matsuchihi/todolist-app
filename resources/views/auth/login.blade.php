@@ -6,6 +6,7 @@
         <div class="col col-md-offset-3 col-md-6">
             <nav class="panel panel-default">
                 <div class="panel-heading">ログイン</div>
+                <h1>hello</h1>
                 <div class="panel-body">
                     @if($errors->any())
                     <div class="alert alert-danger">
@@ -32,7 +33,7 @@
             </nav>
             <div class="text-center">
                 <a href="{{ route('password.request') }}">パスワードの変更はこちらから</a>
-                
+
             </div>
         </div>
     </div>
