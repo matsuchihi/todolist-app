@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('folders', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreignId('user_id')->constrained(); 
             $table->string('title', 20);
             $table->timestamps();
         });
